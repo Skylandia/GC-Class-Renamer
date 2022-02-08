@@ -9,24 +9,27 @@
 // @grant        none
 // ==/UserScript==
 
-let classNames = window.localStorage.getItem("class-names");
-if (classNames == null) {
-	classNames = new Map();
-	renameRequest();
-	renameClasses();
+var classNames = new Map();
+
+function loadClassNames() {
+    classNames = new Map(JSON.parse(window.localStorage.getItem("class-names")));
+    if (classNames.size == 0) {
+        classNames = new Map();
+        renameRequest();
+    }
 }
 
 function renameRequest() {
-	for (const node of document.getElementsByClassName("YVvGBb z3vRcc-ZoZQ1")) {
-		classNames.set(node.innerHTML, prompt("Rename: ", node.innerHTML));
+	for (const node of document.getElementsByClassName("gHz6xd Aopndd rZXyy")) {
+		classNames.set(node.getAttribute("data-course-id"), prompt("Rename: ", node.children[0].children[2].children[1].children[0].children[0].innerHTML));
 	}
-	window.localStorage.setItem("class-names", classNames);
+	window.localStorage.setItem("class-names", JSON.stringify(Array.from(classNames.entries())));
 }
 
 function renameClasses() {
     console.log("The classroom divs have loaded, renaming classes...");
-    for (const node of document.getElementsByClassName("YVvGBb z3vRcc-ZoZQ1")) {
-        node.innerHTML = classNames.get(node.innerHTML);
+    for (const node of document.getElementsByClassName("gHz6xd Aopndd rZXyy")) {
+        node.children[0].children[2].children[1].children[0].children[0].innerHTML = classNames.get(node.getAttribute("data-course-id"));
     }
 }
 
@@ -39,7 +42,9 @@ const callback = function(mutationsList, observer) {
         }
         else if (!isClassNameDifferent && targetNode.className == "EIlDfe kYtXye nk6WKe") {
             isClassNameDifferent = true;
-            addRenameOption();
+            if (classNames.size == 0) {
+                loadClassNames();
+            }
             renameClasses();
             //observer.disconnect();
         }
