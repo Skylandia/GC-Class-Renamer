@@ -5,7 +5,7 @@
 // @description  Allows renaming classes in Google Classroom
 // @author       Skylandia
 // @match        https://classroom.google.com/h
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=google.com
+// @icon         https://ssl.gstatic.com/classroom/favicon.png
 // @grant        none
 // ==/UserScript==
 
