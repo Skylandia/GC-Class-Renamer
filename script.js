@@ -12,12 +12,15 @@
 let classNames = window.localStorage.getItem("class-names");
 if (classNames == null) {
 	classNames = new Map();
+	renameRequest();
+	renameClasses();
 }
 
-function addRenameOption() {
+function renameRequest() {
 	for (const node of document.getElementsByClassName("YVvGBb z3vRcc-ZoZQ1")) {
 		classNames.set(node.innerHTML, prompt("Rename: ", node.innerHTML));
 	}
+	window.localStorage.setItem("class-names", classNames);
 }
 
 function renameClasses() {
