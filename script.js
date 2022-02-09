@@ -21,7 +21,7 @@ function loadClassNames() {
 
 function renameRequest() {
 	for (const node of document.getElementsByClassName("gHz6xd Aopndd rZXyy")) {
-		classNames.set(node.getAttribute("data-course-id"), prompt("Rename: ", node.children[0].children[2].children[1].children[0].children[0].innerHTML));
+		classNames.set(node.getAttribute("data-course-id"), [prompt("Rename title: ", node.children[0].children[2].children[1].children[0].children[0].innerHTML), prompt("Rename subititle: ", node.children[0].children[2].children[1].children[0].children[1].innerHTML)]);
 	}
 	window.localStorage.setItem("class-names", JSON.stringify(Array.from(classNames.entries())));
 }
@@ -29,7 +29,8 @@ function renameRequest() {
 function renameClasses() {
     console.log("The classroom divs have loaded, renaming classes...");
     for (const node of document.getElementsByClassName("gHz6xd Aopndd rZXyy")) {
-        node.children[0].children[2].children[1].children[0].children[0].innerHTML = classNames.get(node.getAttribute("data-course-id"));
+        node.children[0].children[2].children[1].children[0].children[0].innerHTML = classNames.get(node.getAttribute("data-course-id"))[0];
+	    node.children[0].children[2].children[1].children[0].children[1].innerHTML = classNames.get(node.getAttribute("data-course-id"))[1];
     }
 }
 
