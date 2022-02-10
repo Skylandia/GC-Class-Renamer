@@ -38,22 +38,35 @@ function renameClasses() {
 }
 
 const targetNode = document.getElementById("yDmH0d"); // The body
-let isClassNameDifferent = false;
-let isSidebarDifferent = false;
+let flag = [false, false, false, false];
 const callback = function(mutationsList, observer) {
     for(const mutation of mutationsList) {
-        if (isClassNameDifferent && targetNode.className != "EIlDfe kYtXye nk6WKe") {
-            isClassNameDifferent = false;
+        if (flag[0] && targetNode.className != "EIlDfe kYtXye nk6WKe") {
+            flag[0] = false;
         }
-        else if (!isClassNameDifferent && targetNode.className == "EIlDfe kYtXye nk6WKe") {
-            isClassNameDifferent = true;
+        else if (!flag[0] && targetNode.className == "EIlDfe kYtXye nk6WKe") {
+            flag[0] = true;
             renameClasses();
         }
-        if (isSidebarDifferent && document.body.children[10].className != "vhK44c CBSF1e") {
-            isClassNameDifferent = false;
+        if (flag[1] && document.body.children[10].className != "vhK44c X1rxSc") {
+            flag[1] = false;
         }
-        else if (!isSidebarDifferent && document.body.children[10].className == "vhK44c CBSF1e") {
-            isClassNameDifferent = true;
+        else if (!flag[1] && document.body.children[10].className == "vhK44c X1rxSc") {
+            flag[1] = true;
+            renameClasses();
+        }
+        if (flag[2] && document.body.children[10].className != "vhK44c CBSF1e") {
+            flag[2] = false;
+        }
+        else if (!flag[2] && document.body.children[10].className == "vhK44c CBSF1e") {
+            flag[2] = true;
+            renameClasses();
+        }
+        if (flag[3] && document.body.children[10].className != "vhK44c OMVS8d") {
+            flag[3] = false;
+        }
+        else if (!flag[3] && document.body.children[10].className == "vhK44c OMVS8d") {
+            flag[3] = true;
             renameClasses();
         }
     }
